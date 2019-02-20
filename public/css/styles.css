@@ -1,0 +1,86 @@
+
+/*Top Navigation*/
+.navbar{
+	background-color:#45CE40;
+}
+
+.myNav{
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+}
+.myNav li a:hover{
+	color: #FAF60F;
+}
+
+/*Body*/
+.container{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.mainSection .mainContent{
+	min-height: 30vh;
+}
+.mainContent{
+	color: black;
+	margin: auto;
+	width: 80%;
+}
+.mainContent li{
+	font-size: 1.5em;
+	line-height: 2;
+	color: #808080;
+}
+.myList{
+	margin:0px;
+	padding: 0px;
+	list-style-type: none;
+}
+.myList li{
+	counter-increment: step-counter;
+	margin-bottom: 5px;
+}
+.myList li::before{
+	content: counter(step-counter);
+	margin-right: 20px;
+	font-size: 80%;
+	background-color: #FAF60F;
+	color: white;
+	font-weight: bold;
+	padding: 3px 13px;
+	border-radius: 50%;
+	border: 0.2px solid;
+    box-shadow: 2px 2.5px #DCDCDC;
+
+}
+.myList li a{
+	text-decoration: none;
+}
+.myList li a:hover{
+	color:black;
+	font-weight: bold;
+}
+
+/*Footer*/
+
+#footer{
+	background-color: #0D2F2F;
+
+}
+#footer ul{
+	list-style-type: none;
+    margin: 20px;
+    padding: 0px;
+    overflow: hidden;
+
+}
+#footer li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 7px 8px;
+    text-decoration: none;
+}
+#footer li a:hover{
+	color: #FAF60F;
+}
