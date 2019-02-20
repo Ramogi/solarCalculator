@@ -28,13 +28,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role()
+    public function roles()
     {
-      return $this->belongsToMany(Role::class,'role_users');
+      return $this->belongsToMany('App\Role','role_users');
     }
 
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function hasAccess(array $permissions)
+    {
+      foreach($this->roles as $role){
+        if($role->hasAccess($permissions)){
+          return true;
+        }
+      }
+      return false;
     }
 }

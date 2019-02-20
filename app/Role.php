@@ -10,6 +10,24 @@ class Role extends Model
 
     public function users()
     {
-      return $this->belongsToMany(User::class,'role_users');
+      return $this->belongsToMany('App\User','role_users');
     }
+
+    public function hasAccess(array $permissions)
+    {
+      foreach($permissions as $permission){
+        if($this->hasPermission($permissions)){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    protected function hasPermission(string $permission)
+    {
+        $permissions = json_encode($this->permissions, true);
+        return $permissions[$permission]??false;
+
+    }
+
 }

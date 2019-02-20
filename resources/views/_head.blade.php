@@ -8,7 +8,5 @@
 	<script src="{{asset('js/jquery.js')}}"></script>
 	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
 	<script src="{{asset('js/calculatorScript.js')}}"></script>
-	
-	
 	@yield('scripts');
 </head>
