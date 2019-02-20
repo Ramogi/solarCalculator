@@ -23,10 +23,10 @@
                                 <a class="nav-link" href="/installers">Installers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Sign in</a>
+                                <a class="nav-link" href="/login">Sign in</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Sign up</a>
+                                <a class="nav-link" href="/register">Sign up</a>
                             </li>
                         </ul>
                         <form class="form-inline my-2 my-lg-0">

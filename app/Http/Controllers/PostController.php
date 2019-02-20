@@ -16,6 +16,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+      //$this->middleware('auth')->only(['create', 'store', 'update','destroy']);
+    }
     public function index()
     {
        $posts = Post::orderBy('id','desc')->paginate(5);
@@ -29,6 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
+      //  $this->authorize('create',$post);
         return view('posts.create');
     }
 
@@ -81,6 +86,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+
         $post = Post::find($id);
         return view('posts.edit')->withPost($post);
     }
