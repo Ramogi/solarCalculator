@@ -5,7 +5,7 @@
       <div class="col-md-12">
             <h1>Create New installer</h1>
         <hr>
-            {!! Form::open(['route' => 'installers.store']) !!}
+            {!! Form::open(['route' => 'store_installer']) !!}
                 {{Form::label('name','Name:')}}
                 {{Form::text('name',null,array('class'=>'form-control'))}}
                 {{Form::label('email','Email:')}}

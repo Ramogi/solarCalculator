@@ -5,7 +5,7 @@
       <div class="col-md-12">
             <h1>Create New service</h1>
         <hr>
-            {!! Form::open(['route' => 'services.store']) !!}
+            {!! Form::open(['route' => 'store_service']) !!}
                 {{Form::label('name','Name:')}}
                 {{Form::text('name',null,array('class'=>'form-control'))}}
                 <hr>

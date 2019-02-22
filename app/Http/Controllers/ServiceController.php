@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreService as StoreServiceRequest;
+use App\Http\Requests\UpdateService as UpdateServiceRequest;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Service;
+use Gate;
+use Auth;
 use Session;
 
 
@@ -38,20 +42,15 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        // Form validation
-        $this->validate($request, array(
-            'name' =>'required|max:190',
-        ));
-
-        //store in db
-        $service = new Service;
-        $service->name=$request->name;
+       
+        $data = $request->only('name');
+        $service = Service::create($data);
         $service->save();
         Session::flash('success','Service successfuly published!');
 
-        return redirect()->route('services.show',$service->id);
+        return redirect()->route('show_service',$service->id);
 
     }
 
@@ -77,7 +76,7 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = Service::find($id);
-        return view('services.edit')->withservice($service);
+        return view('services.edit')->with('service',$service);
     }
 
     /**
@@ -87,20 +86,15 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Service $post, UpdateServiceRequest $request)
     {
-        // Form validation
-        $this->validate($request, array(
-            'name' =>'required|max:190',
-        ));
+        
 
-        //save in db
-        $service = Service::find($id);
-        $service->name=$request->input('name');
-        $service->save();
-        Session::flash('success','Service successfuly updated!');
+        $data = $request->only('name');
+        $service->fill($data)->save();
+        Session::flash('success','Service successfuly published!');
 
-        return redirect()->route('services.show',$service->id);
+        return redirect()->route('services.show')->with('service',$service);
     }
 
     /**
@@ -109,12 +103,11 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Service $service)
     {
-        $service= Service::find($id);
         $service->delete();
         Session::flash('success','Service successfuly deleted!');
 
-        return redirect()->route('services.index');
+        return redirect()->route('list_services');
     }
 }

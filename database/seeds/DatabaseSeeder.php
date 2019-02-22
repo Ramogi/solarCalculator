@@ -23,6 +23,15 @@ class DatabaseSeeder extends Seeder
         }
         // $this->call(UsersTableSeeder::class);
         $this->call(RolesSeeder::class);
+
+        // Posts Seeder 
+        factory(\App\Post::class, 30)->create();
+        $this->command->info('Some Posts data seeded.');
+
+        // Installer Seeder 
+        factory(\App\Installer::class, 30)->create();
+        $this->command->info('Some Installer data seeded.');
+        $this->command->warn('All done :)');
     }
     
 }

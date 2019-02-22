@@ -3,7 +3,7 @@
 @section('content')
 <h1>Edit service</h1>
 <div class="row">
-  {!!Form::model($service,['route'=>['services.update',$service->id],'method' =>'PUT'])!!}
+  {!!Form::model($service,['route'=>['update_services',$service->id],'method' =>'POST'])!!}
   <div class="form-group"> 
     {{ Form::label( 'name', 'Name' ) }} {{ Form::text( 'name', null, [ 'class' => 'form-control' ] ) }} 
   </div> 
@@ -20,7 +20,7 @@
       <hr>
       <div class="row">
         <div class="col-sm-6">
-          {{ Html::linkRoute('services.show','Cancel',array($service->id), array('class'=>'btn btn-danger btn-block'))}}
+          {{ Html::linkRoute('show_services','Cancel',array($service->id), array('class'=>'btn btn-danger btn-block'))}}
         </div>
         <div class="col-sm-6">
           {{Form::submit('Save',['class'=>'btn btn-success btn-block'])}}

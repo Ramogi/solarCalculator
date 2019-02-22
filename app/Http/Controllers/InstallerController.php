@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreIstaller as StoreInstallerRequest;
+use App\Http\Requests\UpdateInstaller as UpdateInstallerRequest;
 use App\Installer;
 use Session;
+use Gate;
+use Auth;
 
 class InstallerController extends Controller
 {
@@ -36,20 +40,15 @@ class InstallerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreInstallerRequest $request)
     {
-        $request->validate([
-        'name'=>'required',
-        'email'=> 'required|string',
-        'location' => 'required|string'
-      ]);
-      $installer = new Installer([
-        'name' => $request->get('name'),
-        'email'=> $request->get('email'),
-        'location'=> $request->get('location')
-      ]);
-      $installer->save();
-      return redirect('/installers')->with('success', 'Installer has been added');
+
+        $data = $request->only('name', 'email', 'location');
+        $installer = Installer::create($data);
+        Session::flash('success','Installer successfuly published!');
+        return redirect()->route('show_installer',$installer->id);
+       
+      
     }
 
     /**
@@ -73,9 +72,8 @@ class InstallerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Installer $installer)
     {
-        $installer = Installer::find($id);
 
         return view('installers.edit', compact('installer'));
     }
@@ -87,19 +85,12 @@ class InstallerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Installer $installer, UpdateInstallerRequest $request)
     {
-        $request->validate([
-        'name'=>'required',
-        'email'=> 'required',
-        'location' => 'required'
-      ]);
+        
 
-      $installer = Installer::find($id);
-      $installer->name = $request->get('name');
-      $installer->email = $request->get('email');
-      $installer->location = $request->get('location');
-      $installer->save();
+        $data = $request->only('name', 'email', 'location');
+        $installer->fill($data)->save();
 
       Session::flash('success','Installer successfuly updated!');
 
@@ -112,11 +103,11 @@ class InstallerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Installer $installer)
     {
-        $installer = Installer::find($id);
+    
         $installer->delete();
 
-        return redirect('/installers')->with('success', 'Installer has been deleted Successfully');
+        return redirect('list_installers')->with('success', 'Installer has been deleted Successfully');
     }
 }

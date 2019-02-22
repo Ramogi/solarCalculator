@@ -3,7 +3,7 @@
 @section('content')
 <h1>Edit installer</h1>
 <div class="row">
-	{!!Form::model($installer,['route'=>['installers.update',$installer->id],'method' =>'PUT'])!!}
+	{!!Form::model($installer,['route'=>['update_installer',$installer->id],'method' =>'POST'])!!}
 	<div class="form-group"> 
 		{{ Form::label( 'name', 'NAme' ) }} {{ Form::text( 'name', null, [ 'class' => 'form-control' ] ) }} 
 	</div> 
@@ -30,7 +30,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-sm-6">
-					{{ Html::linkRoute('installers.show','Cancel',array($installer->id), array('class'=>'btn btn-danger btn-block'))}}
+					{{ Html::linkRoute('show_installer','Cancel',array($installer->id), array('class'=>'btn btn-danger btn-block'))}}
 				</div>
 				<div class="col-sm-6">
 					{{Form::submit('Save',['class'=>'btn btn-success btn-block'])}}

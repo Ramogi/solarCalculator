@@ -18,11 +18,15 @@
 			<hr>
 			<div class="row">
 				<div class="col-sm-6">
-					{!! Html::linkRoute('services.edit','Edit',array($service->id), array('class'=>'btn btn-primary btn-block'))!!}
+					@can('update_service')
+					{!! Html::linkRoute('edit_service','Edit',array($service->id), array('class'=>'btn btn-primary btn-block'))!!}
+					@endcan
 				</div>
 				<div class="col-sm-6">
-					{!! Form::open(['route'=>['services.destroy', $service->id], 'method'=>'DELETE']) !!}
+					{!! Form::open(['route'=>['delete_service', $service->id], 'method'=>'DELETE']) !!}
+					@can('delete-service', $service)
 					{{Form::submit('Delete',['class'=>'btn btn-danger btn-block'])}}
+					@endcan
 					{!!Form::close()!!}	
 					
 				</div>
@@ -30,7 +34,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-12">
-					{{Html::linkRoute('services.index','View all services',[],['class'=>'btn btn-success btn-block'])}}
+					{{Html::linkRoute('list_services','View all services',[],['class'=>'btn btn-success btn-block'])}}
 				</div>
 			</div>
 		</div>	

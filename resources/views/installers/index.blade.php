@@ -6,7 +6,9 @@
     <h1>All installers</h1>
   </div>
   <div class="col-md-2">
-    <a href="{{route('installers.create')}}" class="btn btn-lg btn-block btn-primary">Create</a>
+    @can('create-installer')
+    <a href="{{route('create_installer')}}" class="btn btn-lg btn-block btn-primary">Create</a>
+    @endcan
   </div>
   <hr>
 </div>
@@ -27,8 +29,9 @@
             <td>{{$installer->email}}</td>
             <td>{{$installer->location}}</td>
             <td>{{date('j M, Y H:i  ',strtotime($installer->created_at))}}</td>
-            <td><a href="{{route('installers.show',$installer->id)}}" class="btn btn-default btn-sm">View</a>
-              <a href="{{route('installers.edit',$installer->id)}}" class="btn btn-default btn-sm">Edit</a></td>
+            <td><a href="{{route('show_installer',$installer->id)}}" class="btn btn-default btn-sm">View</a>
+              @can('update-installer', $installer)
+              <a href="{{route('edit_installer',$installer->id)}}" class="btn btn-default btn-sm">Edit</a>@endcan</td>
           </tr>
         @endforeach
       </tbody>

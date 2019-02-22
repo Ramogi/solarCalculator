@@ -26,6 +26,23 @@ class RolesSeeder extends Seeder
             'permissions' =>json_encode([
                 'update-post' => true,
                 'delete-post' => true,
+                'delete-service' => true,
+                'update-service' => true,
+                'update-installer' => true,
+                'delete-installer' => true,
+            ]),
+        ]);
+
+        $installer = Role::create([
+            'name' => 'Installer', 
+            'slug' => 'installer',
+            'permissions' =>json_encode([
+                'create-post' => true,
+                'update-post' => true,
+                'create-installer' => true,
+                'update-installer' => true,
+                'create-service' => true,
+                'update-service' => true,
             ]),
         ]);
     }
