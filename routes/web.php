@@ -11,26 +11,34 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('index');
+Route::get('/', function () {
+    return view('pages.index');
 });
 
 Route::get('/calculator', function () {
-    return view('calc');
+    return view('pages.calculator');
 });
 
+/*Route::get('/calculator', function () {
+    return view('calc');
+});*/
 
 
 
 
 
-/*Route::resource('installers','InstallerController');
+
+/*
 Route::resource('services','ServiceController');
 Route::resource('posts','PostController');*/
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/dashboard', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::get('/', 'PostController@index');
+Route::resource('installers','InstallerController');
+
+
 Route::get('/posts', 'PostController@index')->name('list_posts');
 Route::group(['prefix' => 'posts'], function () {
     Route::get('/show/{id}', 'PostController@show')

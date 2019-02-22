@@ -1,104 +1,86 @@
 
-$(function(){
-
-	
-var loadCalc=(function(){
-
-	var addRow, html, rowCount, tableBody, tableRow, totalWatts,hrs,qty,watts;
-		addRow=$("#addRow");
-		rowCount=$("#loadTable tbody tr").length + 1;
-		tableBody=$("#loadTable tbody");
 
 
+		function getDailyWattHr() {
+
+    var theForm = document.forms["calculatorform"];
+    var monthlyWattHr = theForm.elements["averageEnergyUse"];
+    var dailyWattHr = 0;
+    if (averageEnergyUse.value != "") {
+        dailyWattHr = parseInt(((averageEnergyUse.value) / 30) * 1.1);
+    }
+    return dailyWattHr;
+}
 
 
+function getAvgSunHrs() {
 
-	function formHtml(){
-
-		html = '<tr id="row_'+ rowCount +'" bgcolor="#e4e4e4" align="center" class="inputRow">';
-		html += '<td>';
-		html +=	'<input type="text" name="appliance[]" id="appliance_'+ rowCount +'" class="appliance form-control input-md"/>';
-		html += '</td>';
-		html += '<td>';
-		html +=	'<input type="number" name="quantity[]" id="quantity_'+ rowCount +'" value=""class="numbersOnly form-control input-md"/>';
-		html += '</td>';
-		html += '<td>';
-		html +=	'<input type="number" name="acwatts[]" id="acwatts_'+ rowCount +'" value="" class="numbersOnly form-control input-md"/>';
-		html += '</td>';
-		html += '<td>';
-		html += '<input type="number" name="hours[]" id="hours_'+ rowCount +'" value=""class="hours form-control input-md"/>';
-		html += '</td>';
-		html += '<td>';
-		html += '<input type="text" name="total[]" id="total_'+ rowCount +'" value="0" class="form-control input-md"/>';							
-		html += '</td>';
-		html += '<td bgcolor="#e4e4e4" class="x-spot" id="delete_'+ rowCount +'">';
-		html += '<input class="x btn-danger form-control input-md" type="button" name="sysLoss" Value="X"/>';									
-		html += '</td>';
-		html += '<tr>';
-		rowCount++;	
-		return html;															
-								
-	}
+    var theForm = document.forms["calculatorform"];
+    var sunHr = theForm.elements["averageSun"];
+    var avgSunHr = 0;
+    if (averageSun.value != "") {
+        avgSunHr = parseInt(averageSun.value);
+    }
+    return avgSunHr;
+}
 
 
-	function getId(element){
-
-		var id, idArr;
-		id = element.attr('id');
-		idArr = id.split("_");
-		return idArr[idArr.length-1];
-	}
+var systemVoltage = new Array();
+systemVoltage["12"] = 12;
+systemVoltage["24"] = 24;
+systemVoltage["48"] = 48;
 
 
-		
-
-	function addNewRow(){
-
-		tableBody.append(formHtml());
-	}
-
-	function deleteRow(){
-
-		var currentEle, rowNo;
-		currentEle = $(this);
-		rowNo = getId(currentEle);
-		$("row_"+rowNo).remove();
-	}
-
-	
+function getSytemVoltage() {
+    var sysVoltage = 0;
+    var theForm = document.forms["calculatorform"];
+    var selectedVoltage = theForm.elements["battery"];
+    sysVoltage = systemVoltage[selectedVoltage.value];
+    return sysVoltage;
+}
+var daysOfAutonomy = new Array();
+daysOfAutonomy["1"] = 1;
+daysOfAutonomy["2"] = 2;
+daysOfAutonomy["3"] = 3;
+daysOfAutonomy["4"] = 4;
+daysOfAutonomy["5"] = 45;
 
 
-	function registerEvents(){
-		addRow.on("click", addNewRow);
-		$(document).on("click",'.x-spot',deleteRow);
-	}
+function getDaysOfAutonomy() {
+    var autonomyDays = 0;
+    var theForm = document.forms["calculatorform"];
+    var selectedDays = theForm.elements["autonomy"];
+    autonomyDays = daysOfAutonomy[selectedDays.value];
+    return autonomyDays;
+}
+	//1.2 to cover energy loss			
+function totalDailyRequirement(){
+	var totalDailyReq = 0;
+	var totalDailyReq = getDailyWattHr()*1.2;
+	return totalDailyReq; 
+}	
+// current inamps
+function totalPvCurrent(){
+	var totalCurrent = 0;
+	var totalCurrent = totalDailyRequirement()/getDaysOfAutonomy()
+	return totalCurrent; 
+}	
 
+function batteryCapacity(){
+	var minBatCapacity = 0;
+	var minBatCapacity = (totalPvCurrent()*2)/getSytemVoltage();
+	return minBatCapacity;
+}	
 
-	function init(){
-		registerEvents();
+function calculateTotal(){
+	var totalWattsPerDay = totalDailyRequirement();
+	var divobj = document.getElementById('wattDay');
+	divobj.style.display  ='block';
+	divobj.innerHTML  = "Total Watt Hours Per Day: "+ totalWattsPerDay;
+}
 
-	}
-
-	
-
-	return{
-		init: init
-	};
-
-
-	
-})();
-
-
-
-
-$(document).ready(function(){
-	loadCalc.init();
-
-	
-
-});
-
-});
-
-
+function hideTotal()
+{
+    var divobj = document.getElementById('wattDay');
+    divobj.style.display='none';
+}
