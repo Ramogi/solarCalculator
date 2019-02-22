@@ -15,7 +15,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        //'App\Post' => 'App\Policies\PostPolicy',
     ];
 
     /**
@@ -34,15 +33,19 @@ class AuthServiceProvider extends ServiceProvider
     public function registerPostPolicies()
     {
       Gate::define('create-post', function($user){
-        $user->hasAccess(['create-post']);
+        return $user->hasAccess(['create-post']);
       });
 
-      Gate::define('update-post', function($user, Post $post){
-        $user->hasAccess(['update-post']) or $user ->id ==$post -> user_id;
+      Gate::define('update-post', function($user, \App\Post $post){
+        return $user->hasAccess(['update-post']) or $user ->id ==$post -> user_id;
       });
 
-      Gate::define('delete-post', function($user, Post $post){
-        $user->hasAccess(['delete-post']) or $user ->id ==$post -> user_id;
+      Gate::define('edit-post', function($user, \App\Post $post){
+        return $user->hasAccess(['edit-post']) or $user ->id ==$post -> user_id;
+      });
+
+      Gate::define('delete-post', function($user, \App\Post $post){
+        return $user->hasAccess(['delete-post']) or $user ->id ==$post -> user_id;
       });
     }
 }

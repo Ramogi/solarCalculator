@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePost as StorePostRequest;
+use App\Http\Requests\UpdatePost as UpdatePostRequest;
+
+use Gate;
 use App\Post;
 use Session;
 use Purifier;
+use Auth;
 
 class PostController extends Controller
 {
@@ -16,10 +21,6 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-      //$this->middleware('auth')->only(['create', 'store', 'update','destroy']);
-    }
     public function index()
     {
        $posts = Post::orderBy('id','desc')->paginate(5);
@@ -33,7 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-      //  $this->authorize('create',$post);
+    
         return view('posts.create');
     }
 
@@ -43,25 +44,16 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        // Form validation
-        $this->validate($request, array(
-            'title' =>'required|max:190',
-            'category' =>'required|max:190',
-            'body' =>'required'
-        ));
 
-        //store in db
-        $post = new Post;
-        $post->title=$request->title;
-        $post->category=$request->category;
-        $post->user_id=auth()->id();
-        $post->body=Purifier::clean($request->body);
-        $post->save();
+
+        $data = $request->only('title', 'category', 'body');
+        $data['body'] = Purifier::clean($data['body']);
+        $data['user_id'] = Auth::user()->id;
+        $post = Post::create($data);
         Session::flash('success','Blog successfuly published!');
-
-        return redirect()->route('posts.show',$post->id);
+        return redirect()->route('show_post',$post->id);
 
     }
 
@@ -84,11 +76,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
 
-        $post = Post::find($id);
-        return view('posts.edit')->withPost($post);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -98,24 +89,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Post $post, UpdatePostRequest $request)
     {
-        // Form validation
-        $this->validate($request, array(
-            'title' =>'required|max:190',
-            'category' =>'required|max:190',
-            'body' =>'required'
-        ));
-
-        //save in db
-        $post = Post::find($id);
-        $post->title=$request->input('title');
-        $post->category=$request->input('category');
-        $post->body=Purifier::clean($request->input('body'));
-        $post->save();
-        Session::flash('success','Blog successfuly updated!');
-
-        return redirect()->route('posts.show',$post->id);
+        
+        $data = $request->only('title', 'category', 'body');
+        $data['body'] = Purifier::clean($data['body']);
+        $post->fill($data)->save();
+        Session::flash('success','Blog successfuly published!');
+        return view('posts.show')->with('post',$post);
     }
 
     /**

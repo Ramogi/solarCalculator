@@ -6,9 +6,10 @@
 		<h1>All Posts</h1>
 	</div>
 	<div class="col-md-2">
-		@can('create-post')
+		
 		<a href="{{route('create_post')}}" class="btn btn-lg btn-block btn-primary">Create</a>
-		 @endcan
+		
+		
 	</div>
 	<hr>
 </div>

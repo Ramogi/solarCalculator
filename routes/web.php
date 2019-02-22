@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('index');
 });
 
@@ -19,7 +19,7 @@ Route::get('/calculator', function () {
     return view('calc');
 });
 
-Auth::routes();
+
 
 
 
@@ -27,6 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 /*Route::resource('installers','InstallerController');
 Route::resource('services','ServiceController');
 Route::resource('posts','PostController');*/
+Auth::routes();
 
 Route::get('/', 'PostController@index');
 Route::get('/posts', 'PostController@index')->name('list_posts');

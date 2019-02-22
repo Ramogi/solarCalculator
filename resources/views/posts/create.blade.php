@@ -15,7 +15,7 @@
     	<div class="col-md-12">
             <h1>Create New Post</h1>
     		<hr>
-            {!! Form::open(['route' => 'posts.store']) !!}
+            {!! Form::open(['route' => 'store_post']) !!}
                 {{Form::label('title','Title:')}}
                 {{Form::text('title',null,array('class'=>'form-control'))}}
                 {{Form::label('category','Category:')}}
