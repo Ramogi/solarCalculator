@@ -25,11 +25,15 @@
 
 			<div class="row">
 				<div class="col-sm-6">
+					@can('update-post', $post)
 					{!! Html::linkRoute('edit_post','Edit',array($post->id), array('class'=>'btn btn-primary btn-block'))!!}
+					@endcan
 				</div>
 				<div class="col-sm-6">
 					{!! Form::open(['route'=>['delete_post', $post->id], 'method'=>'DELETE']) !!}
+					@can('delete-post', $post)
 					{{Form::submit('Delete',['class'=>'btn btn-danger btn-block'])}}
+					@endcan
 					{!!Form::close()!!}
 
 				</div>

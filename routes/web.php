@@ -23,10 +23,11 @@ Route::get('/calculator', function () {
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 /*Route::resource('installers','InstallerController');
 Route::resource('services','ServiceController');
 Route::resource('posts','PostController');*/
+Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/', 'PostController@index');
@@ -46,7 +47,7 @@ Route::group(['prefix' => 'posts'], function () {
     Route::post('/edit/{post}', 'PostController@update')
         ->name('update_post')
         ->middleware('can:update-post,post');
-    Route::post('/delete/{post}', 'PostController@destroy')
+    Route::delete('/delete/{post}', 'PostController@destroy')
         ->name('delete_post')
         ->middleware('can:delete-post,post');
 });
