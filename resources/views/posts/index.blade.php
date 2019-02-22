@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','All Posts')
 @section('content')
 <div class="row">
@@ -18,7 +18,6 @@
 	<div class="col-md-12">
 		<table class="table">
 			<thead>
-				<th>#</th>
 				<th>Title</th>
 				<th>Category</th>
 				<th>Body</th>
@@ -28,7 +27,6 @@
 			<tbody>
 				@foreach($posts as $post)
 					<tr>
-						<th>{{$post->id}}</th>
 						<td>{{$post->title}}</td>
 						<td>{{$post->category}}</td>
 						<td>{{substr(strip_tags($post->body),0, 60)}}{{strlen($post->body) > 50 ? "..." : ""}}</td>

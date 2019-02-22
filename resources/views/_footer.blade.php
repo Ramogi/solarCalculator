@@ -17,9 +17,11 @@
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
-                <ul class="list-unstyled quick-links">
-                    <li><a href="impressum">Impressum</a></li>
-                    <li><a href="terms">Terms & Conditions</a></li>
+                <ul class="list-unstyled quick-links" style="color: white;">
+                    <li><h6>Impressum</h6></li>
+                    <li><p>Billy Ochieng Ramogi</p></li>
+                    <li><p>HTG Konstanz</p></li>
+                    <li><p>bilramog@htwg-konstanz.de</p></li>
                 </ul>
             </div>
         </div>

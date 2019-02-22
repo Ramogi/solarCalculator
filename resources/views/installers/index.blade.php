@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','All installers')
 @section('content')
 <div class="row">
@@ -14,7 +14,6 @@
   <div class="col-md-12">
     <table class="table">
       <thead>
-        <th>#</th>
         <th>Name</th>
         <th>Email</th>
         <th>Location</th>
@@ -24,7 +23,6 @@
       <tbody>
         @foreach($installers as $installer)
           <tr>
-            <th>{{$installer->id}}</th>
             <td>{{$installer->name}}</td>
             <td>{{$installer->email}}</td>
             <td>{{$installer->location}}</td>

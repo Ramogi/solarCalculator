@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','Edit Post')
 @section('scripts')
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>

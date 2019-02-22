@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','Edit installer')
 @section('content')
 <h1>Edit installer</h1>

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','Edit service')
 @section('content')
 <h1>Edit service</h1>

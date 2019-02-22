@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','View Post')
 @section('content')
 <div class="row">

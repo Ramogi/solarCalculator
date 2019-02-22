@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.apps')
 @section('title','All services')
 @section('content')
 <div class="row">
@@ -14,7 +14,6 @@
   <div class="col-md-12">
     <table class="table">
       <thead>
-        <th>#</th>
         <th>Service</th>
         <th>Created At</th>
         <th></th>
@@ -22,7 +21,6 @@
       <tbody>
         @foreach($services as $service)
           <tr>
-            <th>{{$service->id}}</th>
             <td>{{$service->name}}</td>
             <td>{{date('j M, Y H:i  ',strtotime($service->created_at))}}</td>
             <td><a href="{{route('services.show',$service->id)}}" class="btn btn-default btn-sm">View</a>
