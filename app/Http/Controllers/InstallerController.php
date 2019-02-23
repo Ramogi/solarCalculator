@@ -94,7 +94,7 @@ class InstallerController extends Controller
 
       Session::flash('success','Installer successfuly updated!');
 
-        return redirect()->route('installers.show',$installer->id);
+        return view('installers.show')->with('installer',$installer);
     }
 
     /**

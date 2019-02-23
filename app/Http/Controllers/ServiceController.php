@@ -76,7 +76,7 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         
-        return view('services.edit')->with('service',$service);
+        return view('services.edit', compact('service'));
     }
 
     /**
@@ -94,7 +94,7 @@ class ServiceController extends Controller
         $service->fill($data)->save();
         Session::flash('success','Service successfuly published!');
 
-        return redirect()->route('services.show')->with('service',$service);
+        return view('services.show')->with('service',$service);
     }
 
     /**

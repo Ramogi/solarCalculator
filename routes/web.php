@@ -19,6 +19,10 @@ Route::get('/calculator', function () {
     return view('pages.calculator');
 });
 
+Route::any ( '/search', 'SearchController@search');
+
+
+
 
 
 Route::get('/dashboard', 'HomeController@index')->name('home');

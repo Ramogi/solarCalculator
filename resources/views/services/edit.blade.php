@@ -6,6 +6,7 @@
             <h1>Edit Service</h1>
         <hr>
             {!!Form::model($service,['route'=>['update_service',$service->id],'method' =>'POST'])!!}
+            
                 {{Form::label('name','Name:')}}
                 {{Form::text('name',null,array('class'=>'form-control'))}}
                 <hr>
