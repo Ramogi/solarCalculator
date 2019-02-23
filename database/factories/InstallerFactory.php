@@ -2,8 +2,8 @@
 use Faker\Generator as Faker;
 $factory->define(App\Installer::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->Company,
         'email' => $faker->unique()->safeEmail,
-        'location' => $faker->realText(rand(5, 10)),
+        'location' => $faker->country,
     ];
 });

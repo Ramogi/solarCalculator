@@ -73,9 +73,9 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        $service = Service::find($id);
+        
         return view('services.edit')->with('service',$service);
     }
 
@@ -86,7 +86,7 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Service $post, UpdateServiceRequest $request)
+    public function update(Service $service, UpdateServiceRequest $request)
     {
         
 

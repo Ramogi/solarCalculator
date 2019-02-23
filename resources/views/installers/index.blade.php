@@ -19,7 +19,6 @@
         <th>Name</th>
         <th>Email</th>
         <th>Location</th>
-        <th>Created At</th>
         <th></th>
       </thead>
       <tbody>
@@ -28,7 +27,6 @@
             <td>{{$installer->name}}</td>
             <td>{{$installer->email}}</td>
             <td>{{$installer->location}}</td>
-            <td>{{date('j M, Y H:i  ',strtotime($installer->created_at))}}</td>
             <td><a href="{{route('show_installer',$installer->id)}}" class="btn btn-default btn-sm">View</a>
               @can('update-installer', $installer)
               <a href="{{route('edit_installer',$installer->id)}}" class="btn btn-default btn-sm">Edit</a>@endcan</td>

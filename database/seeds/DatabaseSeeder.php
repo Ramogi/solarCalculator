@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
             // Call the php artisan migrate:refresh
             $this->command->call('migrate:refresh');
             $this->command->warn("Data cleared, starting from blank database.");
-             //enable back fk constrain check
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+
+            factory(App\User::class, 5)->create();
         // $this->call(UsersTableSeeder::class);
         $this->call(RolesSeeder::class);
 
@@ -32,6 +31,11 @@ class DatabaseSeeder extends Seeder
         factory(\App\Installer::class, 30)->create();
         $this->command->info('Some Installer data seeded.');
         $this->command->warn('All done :)');
+             //enable back fk constrain check
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
+
+
     }
     
 }

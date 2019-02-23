@@ -29,7 +29,7 @@
 					<tr>
 						<td>{{$post->title}}</td>
 						<td>{{$post->category}}</td>
-						<td>{{substr(strip_tags($post->body),0, 60)}}{{strlen($post->body) > 50 ? "..." : ""}}</td>
+						<td>{{substr(strip_tags($post->body),0, 100)}}{{strlen($post->body) > 90 ? "..." : ""}}</td>
 						<td>{{date('j M, Y H:i  ',strtotime($post->created_at))}}</td>
 						<td><a href="{{route('show_post',$post->id)}}" class="btn btn-default btn-sm">View</a>
 						@can('update-post', $post)
