@@ -90,7 +90,33 @@ body{
 	font-weight: 600;
 }
 
+.cookie-banner .container{
+	margin: 0 auto;
+	width: 70%;
+	color: black;
+	padding: 15px;
+	
+}
 
+.cookie-banner {
+	display: none;
+	font:0.75em Arial;
+	
+}
+.cookie-banner a{
+	color: yellow;
+}
+
+.button{
+	background: #ccc;
+	color: #333;
+	text-decoration: none;;
+	padding: 5px 10px;
+	display: inline-block;
+	border: 1px solid #aaa;
+	border-bottom: 2px solid #aaa;
+
+}
 
 
 /*Footer*/

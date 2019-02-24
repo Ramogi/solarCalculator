@@ -1,3 +1,11 @@
+<?php
+    if(isset($_GET['accept-cookies'])){
+        setcookie('accept-cookies','true',time() + 31556925);
+        header('Location:./');
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -16,6 +24,22 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
+        
+        <?php
+            if(!isset($_COOKIE['accept-cookies'])){
+            ?>
+
+        <div class="cookie-banner">
+            <div class="container">
+                <p>We use cookies on this website. By using this website, consent is assumed</p>
+                <a href="?accept-cookies" class="button"> Continue</a>
+            </div>
+        </div>
+        <?php
+            }
+            ?>
+
+
         <div id="app" class="content">
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class="container">
