@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.index');
-});
+Route::get('/', 'PageController@homepage');
+Route::get('/calculator', 'PageController@calc');
+Route::any('/location', 'PageController@recommend');
 
-Route::get('/calculator', function () {
-    return view('pages.calculator');
-});
+
+
+
 
 Route::any ( '/search', 'SearchController@search');
 
