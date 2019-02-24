@@ -1,15 +1,15 @@
 @extends('layouts.apps')
-@section('title','location')
+@section('title','recommend')
 @section('content')
 <div class="container">
     @if(isset($details))
-        <h6> Installers in Your Region</h6>
+    <h6> Installers in Your Region</h6>
     <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Location</th>                
+                <th>Location</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +24,4 @@
     </table>
     @endif
 </div>
-
-
 @endsection

@@ -15,6 +15,8 @@ class PageController extends Controller
 
    public function calc()
     {
+
+    	$location = 'pages.location';
        return view('pages.calculator');
     }
 
@@ -26,7 +28,8 @@ class PageController extends Controller
 			if (count ( $installer ) > 0)
 				return view('pages.location')->withDetails ( $installer )->withQuery ( $installer );
 			else
-				return view('pages.location')->withMessage ( 'No Installer in Your Region!' );
+				return view('page.location')->withMessage('No Installer in Your Region!');
+
 			}
 
 

@@ -7,7 +7,7 @@
 		<form action="/location" method="POST" id="calculatorform" >
 			{{ csrf_field() }}
 			<fieldset>
-				<legend>Energy Consumption</legend>
+				
 				<table>
 					<tr>
 						<td><label >Average Monthly Energy Use</label></td>
@@ -39,16 +39,16 @@
 								</select>
 							</td>
 						</tr>
-						<tr><td><label >Location</label></td><td><input class="" type="text" placeholder="Enter your Location" name="location" aria-label=""><input type="submit" class="Calculate"></td></tr>
+						<tr><td><label >Location</label></td><td><input class="" type="text" placeholder="Enter your Location" name="location" aria-label=""><input type="submit" ></td></tr>
 					</table>
 					<div class="results" id="wattDay"></div>
 					<div class="results" id="ampPerDay"></div>
 					<div class="results" id="batteries"></div>
 					<div class="results" id="pvCapacity"></div>
 					<div class="results" id="inverterSize"></div>
-					
 				</fieldset>
 			</form>
+
 		</div>
 	</div>
 
